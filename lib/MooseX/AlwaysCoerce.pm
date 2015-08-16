@@ -1,37 +1,50 @@
-package MooseX::AlwaysCoerce;
-{
-  $MooseX::AlwaysCoerce::VERSION = '0.21';
-}
-# git description: v0.20-7-gd590377
-
-BEGIN {
-  $MooseX::AlwaysCoerce::AUTHORITY = 'cpan:RKITOVER';
-}
+package MooseX::AlwaysCoerce; # git description: v0.21-18-g4a7a7fd
 # ABSTRACT: Automatically enable coercions for Moose attributes
+# KEYWORDS: Moose extension type constraint coerce coercion
+
+our $VERSION = '0.22';
 
 use strict;
 use warnings;
 
 use namespace::autoclean 0.12;
-use Moose ();
 use MooseX::ClassAttribute 0.24 ();
 use Moose::Exporter;
 use Moose::Util::MetaRole;
-use Carp;
 
 Moose::Exporter->setup_import_methods;
 
+#pod =pod
+#pod
+#pod =for stopwords coercions
+#pod
+#pod =head1 SYNOPSIS
+#pod
+#pod     package MyClass;
+#pod
+#pod     use Moose;
+#pod     use MooseX::AlwaysCoerce;
+#pod     use MyTypeLib 'SomeType';
+#pod
+#pod     has foo => (is => 'rw', isa => SomeType); # coerce => 1 automatically added
+#pod
+#pod     # same, MooseX::ClassAttribute is automatically applied
+#pod     class_has bar => (is => 'rw', isa => SomeType);
+#pod
+#pod =head1 DESCRIPTION
+#pod
+#pod Have you ever spent an hour or more trying to figure out "Hey, why did my
+#pod coercion not run?" only to find out that you forgot C<< coerce => 1 >> ?
+#pod
+#pod Just load this module in your L<Moose> class and C<< coerce => 1 >> will be
+#pod enabled for every attribute and class attribute automatically.
+#pod
+#pod Use C<< coerce => 0 >> to disable a coercion explicitly.
+#pod
+#pod =cut
 
 {
-    package MooseX::AlwaysCoerce::Role::Meta::Attribute;
-{
-  $MooseX::AlwaysCoerce::Role::Meta::Attribute::VERSION = '0.21';
-}
-# git description: v0.20-7-gd590377
-
-BEGIN {
-  $MooseX::AlwaysCoerce::Role::Meta::Attribute::AUTHORITY = 'cpan:RKITOVER';
-}
+    package MooseX::AlwaysCoerce::Role::Meta::Attribute; # git description: v0.21-18-g4a7a7fd
     use namespace::autoclean;
     use Moose::Role;
 
@@ -47,18 +60,10 @@ BEGIN {
         return 0;
     };
 
-    package MooseX::AlwaysCoerce::Role::Meta::Class;
-{
-  $MooseX::AlwaysCoerce::Role::Meta::Class::VERSION = '0.21';
-}
-# git description: v0.20-7-gd590377
-
-BEGIN {
-  $MooseX::AlwaysCoerce::Role::Meta::Class::AUTHORITY = 'cpan:RKITOVER';
-}
+    package MooseX::AlwaysCoerce::Role::Meta::Class; # git description: v0.21-18-g4a7a7fd
     use namespace::autoclean;
     use Moose::Role;
-    use Moose::Util::TypeConstraints;
+    use Moose::Util::TypeConstraints ();
 
     around add_class_attribute => sub {
         my $next = shift;
@@ -110,16 +115,13 @@ __END__
 
 =encoding UTF-8
 
-=for :stopwords Rafael Kitover <rkitover@cpan.org> Jesse Luehrs Karen Etheridge Michael G.
-Schwern coercions AnnoCPAN Rolsky
-
 =head1 NAME
 
 MooseX::AlwaysCoerce - Automatically enable coercions for Moose attributes
 
 =head1 VERSION
 
-version 0.21
+version 0.22
 
 =head1 SYNOPSIS
 
@@ -144,6 +146,8 @@ enabled for every attribute and class attribute automatically.
 
 Use C<< coerce => 0 >> to disable a coercion explicitly.
 
+=for stopwords coercions
+
 =for Pod::Coverage init_meta
 
 =head1 BUGS
@@ -161,6 +165,8 @@ You can find more information at:
 =item * RT: CPAN's request tracker
 
 L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=MooseX-AlwaysCoerce>
+
+=for stopwords AnnoCPAN
 
 =item * AnnoCPAN: Annotated CPAN documentation
 
@@ -180,26 +186,19 @@ L<http://search.cpan.org/dist/MooseX-AlwaysCoerce/>
 
 My own stupidity, for inspiring me to write this module.
 
+=for stopwords Rolsky
+
 Dave Rolsky, for telling me how to do it the L<Moose> way.
 
 =head1 AUTHOR
 
 Rafael Kitover <rkitover@cpan.org>
 
-=head1 COPYRIGHT AND LICENSE
-
-This software is copyright (c) 2009 by Rafael Kitover <rkitover@cpan.org>.
-
-This is free software; you can redistribute it and/or modify it under
-the same terms as the Perl 5 programming language system itself.
-
 =head1 CONTRIBUTORS
 
+=for stopwords Karen Etheridge Jesse Luehrs Michael G. Schwern
+
 =over 4
-
-=item *
-
-Jesse Luehrs <doy@tozt.net>
 
 =item *
 
@@ -207,8 +206,19 @@ Karen Etheridge <ether@cpan.org>
 
 =item *
 
+Jesse Luehrs <doy@tozt.net>
+
+=item *
+
 Michael G. Schwern <schwern@pobox.com>
 
 =back
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2009 by Rafael Kitover <rkitover@cpan.org>.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut
