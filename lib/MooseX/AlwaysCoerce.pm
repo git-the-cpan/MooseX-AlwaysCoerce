@@ -1,8 +1,9 @@
-package MooseX::AlwaysCoerce; # git description: v0.21-18-g4a7a7fd
+package MooseX::AlwaysCoerce; # git description: v0.22-7-gf255031
+# vim: set ts=8 sts=4 sw=4 tw=115 et :
 # ABSTRACT: Automatically enable coercions for Moose attributes
 # KEYWORDS: Moose extension type constraint coerce coercion
 
-our $VERSION = '0.22';
+our $VERSION = '0.23';
 
 use strict;
 use warnings;
@@ -44,7 +45,8 @@ Moose::Exporter->setup_import_methods;
 #pod =cut
 
 {
-    package MooseX::AlwaysCoerce::Role::Meta::Attribute; # git description: v0.21-18-g4a7a7fd
+    package # hide from PAUSE
+        MooseX::AlwaysCoerce::Role::Meta::Attribute;
     use namespace::autoclean;
     use Moose::Role;
 
@@ -60,7 +62,8 @@ Moose::Exporter->setup_import_methods;
         return 0;
     };
 
-    package MooseX::AlwaysCoerce::Role::Meta::Class; # git description: v0.21-18-g4a7a7fd
+    package # hide from PAUSE
+        MooseX::AlwaysCoerce::Role::Meta::Class;
     use namespace::autoclean;
     use Moose::Role;
     use Moose::Util::TypeConstraints ();
@@ -107,7 +110,6 @@ sub init_meta {
 }
 
 1;
-# vim:et sts=4 sw=4 tw=0:
 
 __END__
 
@@ -121,7 +123,7 @@ MooseX::AlwaysCoerce - Automatically enable coercions for Moose attributes
 
 =head1 VERSION
 
-version 0.22
+version 0.23
 
 =head1 SYNOPSIS
 
@@ -150,38 +152,6 @@ Use C<< coerce => 0 >> to disable a coercion explicitly.
 
 =for Pod::Coverage init_meta
 
-=head1 BUGS
-
-Please report any bugs or feature requests to C<bug-moosex-alwayscoerce at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=MooseX-AlwaysCoerce>.  I will be notified, and then you'll
-automatically be notified of progress on your bug as I make changes.
-
-=head1 SUPPORT
-
-You can find more information at:
-
-=over 4
-
-=item * RT: CPAN's request tracker
-
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=MooseX-AlwaysCoerce>
-
-=for stopwords AnnoCPAN
-
-=item * AnnoCPAN: Annotated CPAN documentation
-
-L<http://annocpan.org/dist/MooseX-AlwaysCoerce>
-
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/MooseX-AlwaysCoerce>
-
-=item * Search CPAN
-
-L<http://search.cpan.org/dist/MooseX-AlwaysCoerce/>
-
-=back
-
 =head1 ACKNOWLEDGEMENTS
 
 My own stupidity, for inspiring me to write this module.
@@ -189,6 +159,17 @@ My own stupidity, for inspiring me to write this module.
 =for stopwords Rolsky
 
 Dave Rolsky, for telling me how to do it the L<Moose> way.
+
+=head1 SUPPORT
+
+Bugs may be submitted through L<the RT bug tracker|https://rt.cpan.org/Public/Dist/Display.html?Name=MooseX-AlwaysCoerce>
+(or L<bug-MooseX-AlwaysCoerce@rt.cpan.org|mailto:bug-MooseX-AlwaysCoerce@rt.cpan.org>).
+
+There is also a mailing list available for users of this distribution, at
+L<http://lists.perl.org/list/moose.html>.
+
+There is also an irc channel available for users of this distribution, at
+L<C<#moose> on C<irc.perl.org>|irc://irc.perl.org/#moose>.
 
 =head1 AUTHOR
 
